@@ -50,8 +50,11 @@ class CurlUtils
         }
 
         $client = Client::getInstance();
+//	$client->getEngine()->addOption('–ignore-ssl-errors=true');
+//	$client->getEngine()->addOption('–ssl-protocol=tlsv1');;
+//	$client->getEngine()->addOption('–web-security=false');
         $client->isLazy();
-        //$client->getEngine()->addOption("--ignore-ssl-errors=true");
+//        $client->getEngine()->addOption("--ignore-ssl-errors=true");
         $client->getEngine()->setPath($path);
 
         $request = $client->getMessageFactory()->createRequest($url, $method);
@@ -75,6 +78,9 @@ class CurlUtils
         }
 
         $client = Client::getInstance();
+	$client->getEngine()->addOption('–ignore-ssl-errors=true');
+//	$client->getEngine()->addOption('–ssl-protocol=tlsv1');
+//	$client->getEngine()->addOption('–web-security=false');
         $client->isLazy();
         $client->getEngine()->addOption("--load-images=true");
         $client->getEngine()->setPath($path);
