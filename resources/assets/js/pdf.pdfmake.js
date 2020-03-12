@@ -682,6 +682,8 @@ NINJA.entityType = function(invoice)
         return invoiceLabels.quote;
     } else if (invoice.balance_amount < 0) {
         return invoiceLabels.credit_note;
+    } else if (hasPayments) {
+        return "RECEIPT";
     } else {
         return invoiceLabels.invoice;
     }
