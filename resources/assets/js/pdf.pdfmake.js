@@ -671,7 +671,16 @@ NINJA.formatDateTime = function(date, account) {
 
     return date ? moment.utc(date).tz(timezone).format(format) : '';
 }
-
+function invoiceHasPayment(invoice) {
+    let result = false;
+    for (let i = 0; i < invoice.invoice_items.length; i++) {
+        let item = invoice.invoice_items[i];
+        if (item.invoice_item_type_id == 3) {
+            result = true;
+        }
+    }
+    return result;
+}
 NINJA.entityType = function(invoice)
 {
     if (invoice.is_delivery_note) {
@@ -682,7 +691,7 @@ NINJA.entityType = function(invoice)
         return invoiceLabels.quote;
     } else if (invoice.balance_amount < 0) {
         return invoiceLabels.credit_note;
-    } else if (hasPayments) {
+    } else if (invoiceHasPayment(invoice)) {
         return "RECEIPT";
     } else {
         return invoiceLabels.invoice;
